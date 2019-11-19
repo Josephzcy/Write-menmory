@@ -1,0 +1,12 @@
+std::string lidarHeader = streamLidar.str();
+uint32_t fileSize = lidarHeader.size();
+unsigned char* pFileBuffer = (unsigned char*)malloc(fileSize);
+memcpy(pFileBuffer, lidarHeader.data(), fileSize);
+FILE* fp=fopen("./LidarInformation.txt","w");
+if(fp)
+{
+	std::cout<<"开始保存"<<std::endl;
+	fwrite(pFileBuffer,1,fileSize,fp);
+	fclose(fp);
+	free(pFileBuffer); 
+}
